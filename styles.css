@@ -1,0 +1,508 @@
+/* ============================================
+   CSS RESET & BASE STYLES
+   ============================================ */
+
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base typography and body styles */
+body {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #000;
+    background-color: #f9f7f7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   12-COLUMN GRID SYSTEM
+   ============================================ */
+
+/* Container: Full width with minimal padding */
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 0 15px;
+    position: relative;
+}
+
+/* Visual grid overlay for development - shows 12 equal columns with 10px gaps */
+/* Uses a repeating pattern: column width + 10px gap */
+.grid-12::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    /* Pattern repeats: column (calc((100% - 110px) / 12)) + gap (10px) */
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc((100% - 110px) / 12),
+        rgba(255, 0, 0, 0.25) calc((100% - 110px) / 12),
+        rgba(255, 0, 0, 0.25) calc((100% - 110px) / 12 + 10px)
+    );
+}
+
+/* Grid wrapper: Creates the 12-column grid */
+.grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px; /* Minimal space between columns */
+    position: relative;
+}
+
+/* Visual grid lines for development - shows the 12 columns with 10px gaps */
+/* Creates vertical lines at each column boundary */
+.grid-12::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    /* Calculate: each column is (100% + 10px) / 12, then subtract 10px for the gap */
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc((100% + 10px) / 12 - 10px),
+        rgba(255, 0, 0, 0.25) calc((100% + 10px) / 12 - 10px),
+        rgba(255, 0, 0, 0.25) calc((100% + 10px) / 12)
+    );
+}
+
+/* Column classes: Each column spans a certain number of grid columns */
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Custom 1.5 column span - starts at column 6, spans 1.5 columns */
+.col-1-5 {
+    grid-column: 6 / 8; /* Spans columns 6-7, but we'll constrain width */
+    width: calc(1.5 * ((100% - 110px) / 12) + 5px); /* 1.5 columns + half a gap */
+    max-width: calc(1.5 * ((100% - 110px) / 12) + 5px);
+    align-self: start; /* Align to top of grid row */
+    margin-top: 0; /* Remove any default top margin */
+}
+
+/* Ensure Education & Awards sections align to top */
+.col-1-5 .info-section {
+    margin-top: 0;
+}
+
+.col-1-5 .info-section:first-child {
+    margin-top: 0;
+}
+
+
+/* ============================================
+   HEADER STYLES
+   ============================================ */
+
+.header {
+    padding: 15px 0 40px 0;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #000;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.symbol-header {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.intro-text-header {
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.contact-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cv-link {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 300;
+    transition: opacity 0.2s ease;
+    display: inline-block;
+}
+
+.cv-link:hover {
+    opacity: 0.6;
+    text-decoration: underline;
+}
+
+/* ============================================
+   MAIN CONTENT STYLES
+   ============================================ */
+
+.main-content {
+    padding: 60px 0 200px; /* Extra bottom padding for eye graphics */
+}
+
+/* Section spacing */
+section {
+    margin-bottom: 50px;
+}
+
+/* Introduction section */
+.intro-section {
+    margin-bottom: 60px;
+}
+
+.symbol {
+    font-size: 24px;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.intro-text {
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 300;
+    max-width: 100%;
+}
+
+.symbol-small {
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* Section titles (Education, Awards, etc.) */
+.section-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Info items (Education, Awards entries) */
+.info-item {
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 300;
+}
+
+.info-item .location {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Project items */
+.project-item {
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.project-item:hover {
+    opacity: 0.7;
+}
+
+.project-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    letter-spacing: -0.2px;
+}
+
+.project-details {
+    font-size: 14px;
+    color: #666;
+    font-weight: 300;
+}
+
+/* Contact section */
+.contact-item {
+    margin-bottom: 12px;
+}
+
+.contact-link {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 300;
+    transition: opacity 0.2s ease;
+    display: inline-block;
+}
+
+.contact-link:hover {
+    opacity: 0.6;
+    text-decoration: underline;
+}
+
+/* ============================================
+   EYE GRAPHICS
+   ============================================ */
+
+.eye-graphics {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    z-index: -1; /* Behind content */
+    pointer-events: none;
+}
+
+.eye {
+    width: 220px;
+    height: 220px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.eye::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + var(--pupil-x, 0px)), calc(-50% + var(--pupil-y, 0px)));
+    width: 88px;
+    height: 88px;
+    background-color: #000;
+    border-radius: 50%;
+    transition: transform 0.3s ease-out;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .grid-12 {
+        gap: 8px;
+    }
+    
+    /* Stack columns on tablet - 2 columns per row */
+    .col-3 {
+        grid-column: span 6; /* 2 columns per row */
+    }
+    
+    .col-6 {
+        grid-column: span 12; /* Full width on tablet */
+    }
+    
+    .text-right {
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    .eye-graphics {
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .eye {
+        width: 165px;
+        height: 165px;
+    }
+    
+    .eye::after {
+        width: 66px;
+        height: 66px;
+    }
+}
+
+/* Mobile: Below 768px */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .grid-12 {
+        gap: 10px;
+    }
+    
+    /* Stack all columns on mobile - full width */
+    .col-1,
+    .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-9,
+    .col-10,
+    .col-11,
+    .col-12 {
+        grid-column: span 12; /* All columns full width on mobile */
+    }
+    
+    .header {
+        padding: 15px 0 30px 0;
+    }
+    
+    .name {
+        font-size: 22px;
+    }
+    
+    .title {
+        font-size: 22px;
+    }
+    
+    .intro-text-header {
+        font-size: 14px;
+        margin-top: 0;
+    }
+    
+    .cv-link {
+        font-size: 14px;
+        margin-top: 0;
+    }
+    
+    .main-content {
+        padding: 40px 0 150px;
+    }
+    
+    section {
+        margin-bottom: 40px;
+    }
+    
+    .intro-section {
+        margin-bottom: 50px;
+    }
+    
+    .eye-graphics {
+        gap: 10px;
+        padding-bottom: 10px;
+        bottom: -50px; /* Partially hidden on mobile */
+    }
+    
+    .eye {
+        width: 132px;
+        height: 132px;
+    }
+    
+    .eye::after {
+        width: 53px;
+        height: 53px;
+    }
+}
+
+/* Small mobile: Below 480px */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .name {
+        font-size: 22px;
+    }
+    
+    .title {
+        font-size: 22px;
+    }
+    
+    .intro-text {
+        font-size: 15px;
+    }
+    
+    .project-title {
+        font-size: 15px;
+    }
+    
+    .eye-graphics {
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .eye {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .eye::after {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY & SMOOTH SCROLLING
+   ============================================ */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT STYLES (Optional)
+   ============================================ */
+
+@media print {
+    .eye-graphics {
+        display: none;
+    }
+    
+    .main-content {
+        padding-bottom: 40px;
+    }
+}
+
