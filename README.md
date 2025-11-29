@@ -1,238 +1,363 @@
-# Portfolio 2025 - Renana Irsai
+# Renana Irsai - Portfolio Website
 
-A minimalist, responsive portfolio website built with HTML, CSS, and JavaScript, featuring a 12-column grid system.
 
-## 📋 Overview
 
-This portfolio website showcases the work of Renana Irsai, a graphic designer based in Jerusalem. The design is based on a clean, grid-based layout that emphasizes typography and content hierarchy.
+## Overview
 
-## 🎨 Design Features
+An interactive portfolio website featuring cursor-responsive "eyes" and a clean, grid-based layout showcasing design work. The site emphasizes playful interactivity while maintaining professional presentation of projects.
 
-- **12-Column Grid System**: Flexible, responsive grid layout that adapts to all screen sizes
-- **Minimalist Aesthetic**: Clean typography and spacing with black text on white background
-- **Responsive Design**: Fully responsive with breakpoints for desktop, tablet, and mobile devices
-- **Interactive Elements**: Smooth animations, hover effects, and eye graphics that follow mouse movement
-- **Accessibility**: Built with semantic HTML and keyboard navigation support
 
-## 📁 Project Structure
 
-```
-Portfolio2025/
-├── index.html          # Main HTML structure
-├── styles.css          # All CSS styles and grid system
-├── script.js           # JavaScript for interactivity
-└── README.md           # This file
-```
+## Design System
 
-## 🚀 Getting Started
 
-### Prerequisites
 
-No build tools or dependencies required! This is a pure HTML/CSS/JS website that can be opened directly in a browser.
+### Layout Structure
 
-### Installation
+- **Grid System**: 12-column layout with 10px gap between columns
 
-1. Clone or download this repository
-2. Open `index.html` in your web browser
-   - **Option 1**: Double-click `index.html` to open in your default browser
-   - **Option 2**: Use a local server (recommended for development):
-     ```bash
-     # Using Python 3
-     python3 -m http.server 8000
-     
-     # Using Node.js (if you have http-server installed)
-     npx http-server
-     ```
-3. Navigate to `http://localhost:8000` in your browser
+- **Column Numbering**: Columns numbered 1-12 from left to right
 
-## 🏗️ How It Works
+- **Viewport Margins**: 20px on all sides (top, bottom, left, right)
 
-### The 12-Column Grid System
+- **Responsive**: Adapts to different screen sizes
 
-The website uses CSS Grid to create a flexible 12-column layout:
 
-- **Desktop (>1024px)**: 4 columns, each spanning 3 grid columns (3+3+3+3 = 12)
-- **Tablet (768px-1024px)**: 2 columns per row, each spanning 6 grid columns (6+6 = 12)
-- **Mobile (<768px)**: Single column, all content spans full width (12 columns)
-
-**Key CSS Classes:**
-- `.container`: Centers content and sets max-width
-- `.grid-12`: Creates the 12-column grid
-- `.col-1` through `.col-12`: Column span classes
-
-### Responsive Breakpoints
-
-1. **Desktop**: Default styles (4 columns)
-2. **Tablet** (`@media max-width: 1024px`): 2 columns per row
-3. **Mobile** (`@media max-width: 768px`): Single column layout
-4. **Small Mobile** (`@media max-width: 480px`): Optimized for small screens
-
-### Interactive Features
-
-1. **Smooth Scrolling**: All anchor links scroll smoothly to their targets
-2. **Project Hover Effects**: Projects have subtle hover animations
-3. **Eye Graphics**: The eyes at the bottom follow mouse movement (subtle effect)
-4. **Scroll Animations**: Content fades in as you scroll down the page
-
-## 🎯 Current Features
-
-### ✅ Implemented
-
-- [x] 12-column responsive grid system
-- [x] Header with name and title
-- [x] Four-column layout for main content
-- [x] Introduction section with symbol
-- [x] Education, Awards, Exhibitions sections
-- [x] Project listings across all columns
-- [x] Contact links section
-- [x] Eye graphics at bottom
-- [x] Responsive design (desktop, tablet, mobile)
-- [x] Smooth scrolling
-- [x] Hover effects on projects
-- [x] Scroll-based fade-in animations
-- [x] Eye mouse-tracking animation
-
-### 🔜 Future Enhancements
-
-- [ ] Individual project detail pages
-- [ ] Image galleries for projects
-- [ ] Contact form
-- [ ] CV download functionality
-- [ ] Social media links integration
-- [ ] Dark mode toggle
-- [ ] Loading animations
-- [ ] Performance optimizations
-
-## 📝 Customization Guide
-
-### Updating Content
-
-**To update your information:**
-
-1. **Name and Title**: Edit the header section in `index.html`:
-   ```html
-   <h1 class="name">Renana Irsai</h1>
-   <p class="title">Graphic Designer</p>
-   ```
-
-2. **Introduction**: Edit the intro text in the first column:
-   ```html
-   <p class="intro-text">Your introduction text here...</p>
-   ```
-
-3. **Projects**: Add or remove project items:
-   ```html
-   <div class="project-item">
-       <h3 class="project-title">Project Name</h3>
-       <p class="project-details">Project details, year</p>
-   </div>
-   ```
-
-4. **Contact Links**: Update contact section with your actual links:
-   ```html
-   <a href="https://instagram.com/yourhandle" class="contact-link">Instagram</a>
-   <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-   ```
-
-### Changing Colors
-
-The design uses a minimalist black-on-white color scheme. To change colors, edit `styles.css`:
-
-- **Text Color**: Change `color: #000;` in the `body` selector
-- **Background**: Change `background-color: #fff;` in the `body` selector
-- **Accent Colors**: Modify hover states and link colors
-
-### Adjusting Spacing
-
-- **Grid Gap**: Change `gap: 20px;` in `.grid-12` selector
-- **Section Spacing**: Modify `margin-bottom` values in section selectors
-- **Container Padding**: Adjust `padding: 0 40px;` in `.container` selector
 
 ### Typography
 
-- **Font Family**: Change `font-family` in the `body` selector
-- **Font Sizes**: Adjust `font-size` values throughout the CSS
-- **Line Height**: Modify `line-height` for better readability
+- **Font Family**: Helvetica
 
-## 🛠️ Technical Details
+- **Scale**: H1 to P ratio of 1.5:1
 
-### Browser Support
+- **Units**: Rem-based sizing for accessibility
 
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- CSS Grid support required (all modern browsers)
-- JavaScript ES6+ features used
+- **Alignment**: Text aligns to column grid structure
 
-### Performance
 
-- No external dependencies or frameworks
-- Lightweight CSS (minimal file size)
-- Vanilla JavaScript (no libraries)
-- Optimized for fast loading
 
-### Accessibility
+### Color Modes
 
-- Semantic HTML5 elements
-- Keyboard navigation support
-- Focus indicators for interactive elements
-- Screen reader friendly structure
+- **Light Mode (Default)**: White background, black text
 
-## 📱 Testing
+- **Dark Mode**: Black background, white text
 
-To test responsiveness:
+- **Toggle**: Located next to H1, switches between modes
 
-1. Open the website in your browser
-2. Use browser DevTools (F12 or Cmd+Option+I)
-3. Toggle device toolbar (Cmd+Shift+M)
-4. Test different screen sizes:
-   - Desktop: 1920px, 1440px, 1280px
-   - Tablet: 1024px, 768px
-   - Mobile: 480px, 375px, 320px
 
-## 🐛 Troubleshooting
 
-**Issue**: Grid not displaying correctly
-- **Solution**: Ensure your browser supports CSS Grid (all modern browsers do)
+## Interactive Elements
 
-**Issue**: Eye graphics not animating
-- **Solution**: Check browser console for JavaScript errors. Ensure `script.js` is loaded.
 
-**Issue**: Content overlapping on mobile
-- **Solution**: Check that responsive media queries are working. Clear browser cache.
 
-## 📚 Learning Resources
+### The Eyes
 
-### CSS Grid
-- [MDN CSS Grid Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout)
-- [CSS-Tricks Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+- **Position**: Centered in viewport
 
-### Responsive Design
-- [MDN Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
-- [Web.dev Responsive Design](https://web.dev/responsive-web-design-basics/)
+- **Structure**: Two circular outlines with solid black pupils
 
-## 📄 License
+- **Behavior**: 
 
-This project is for personal portfolio use.
+  - Pupils track cursor movement
 
-## 👤 Author
+  - Pupils move within circle bounds
 
-**Renana Irsai**
-- Graphic Designer
-- Based in Jerusalem
-- Design Operations Lead at Lightricks
-- Lecturer at Bezalel Academy of Arts and Design
+  - 5px padding maintained between pupil edge and circle edge
 
----
+  - Eyes remain interactive across all pages
 
-## 🔄 Changelog
 
-### Version 1.0.0 (Initial Release)
-- ✅ 12-column grid system implemented
-- ✅ Responsive design for all screen sizes
-- ✅ All content sections added
-- ✅ Interactive features (hover effects, animations)
-- ✅ Eye graphics with mouse tracking
-- ✅ Smooth scrolling and scroll animations
 
----
+### Cursor Trail
 
-**Last Updated**: January 2025
+- **Visual**: A trail of cursor arrow duplicates following the main cursor
+
+- **Behavior**:
+
+  - Multiple cursor instances (suggest 5-8 copies)
+
+  - Each follows the previous with slight delay
+
+  - Creates smooth, snake-like motion trail
+
+  - Fades slightly or maintains full opacity
+
+  - Trail follows cursor everywhere on site
+
+- **Technical Implementation**:
+
+  - Track cursor position history
+
+  - Render custom cursor elements at delayed positions
+
+  - Use CSS transforms for smooth animation
+
+  - Consider requestAnimationFrame for performance
+
+  
+
+#### Eyes in Project Pages
+
+- Scale down to small size
+
+- Relocate to top of page
+
+- Maintain cursor-tracking functionality
+
+
+
+### About Section
+
+- **Default State**: Collapsed
+
+- **Toggle Button**: 
+
+  - Positioned at right edge of column 3
+
+  - Default: `+` symbol
+
+  - On click: Rotates 45° to form `×`
+
+  - Opens/closes about content
+
+- **Content Alignment**: Text aligns to top of viewport
+
+- **Content Includes**: Bio, education, exhibitions, awards
+
+
+
+### Project List
+
+- **Alignment**: Bottom of viewport
+
+- **Layout**: Organized in columns
+
+- **Hover State**: 
+
+  - Thumbnail preview appears
+
+  - Preview position varies dynamically
+
+- **Click Behavior**: Opens dedicated project page
+
+
+
+### Project Pages
+
+- **Structure**: 
+
+  - Small interactive eyes at top center
+
+  - Navigation: "< Back" (left) and "Next >" (right) at top
+
+  - Project title and description (left side)
+
+  - Image gallery (right side, large display area)
+
+  - Project metadata tags at bottom left
+
+- **Gallery**: 
+
+  - Large display area spanning right portion of grid
+
+  - Multiple images showcasing the work
+
+  - Can display single large images or multiple images in grid
+
+  - Images can vary in aspect ratio and composition
+
+- **Layout**:
+
+  - Eyes remain small and centered at top
+
+  - Left content area (approximately columns 1-4): Title, type, year, description text, metadata tags
+
+  - Right content area (approximately columns 5-12): Large gallery space for project images
+
+  - Navigation controls remain accessible at top left
+
+
+
+## Page Structure
+
+
+
+### Home Page
+
+```
+Header
+
+├── Name (H1) + Dark mode toggle
+
+└── About toggle (+/×)
+
+
+
+Center
+
+└── Interactive Eyes
+
+
+
+Footer
+
+├── Project List (left columns)
+
+└── Contact/CV links (right column)
+
+```
+
+
+
+### Project Pages
+
+```
+Header
+
+├── Small Interactive Eyes (centered)
+
+└── Navigation: < Back | Next >
+
+
+
+Content (Two Column)
+
+├── Left Column (Info)
+
+│   ├── Project Title (H1)
+
+│   ├── Project Type
+
+│   ├── Year
+
+│   ├── Description (paragraph)
+
+│   └── Metadata Tags [category, type]
+
+│
+
+└── Right Column (Gallery)
+
+    └── Large Image Display Area
+
+        ├── Single large images, or
+
+        └── Multiple images in grid
+
+```
+
+
+
+## Technical Specifications
+
+
+
+### Column Usage Guide
+
+- **Columns 1-2**: Left project list
+
+- **Column 3**: About toggle button placement
+
+- **Columns 4-9**: Center content area / Eyes
+
+- **Columns 10-12**: Right project list / Contact info
+
+
+
+### Project Page Column Usage
+
+- **Columns 1-4**: Project information (title, type, year, description, tags)
+
+- **Columns 5-12**: Gallery space for large project images
+
+- **Top center**: Small interactive eyes (spanning approximately columns 5-8)
+
+
+
+### Responsive Breakpoints
+
+- Adapt column count for mobile/tablet
+
+- Maintain eye interactivity across all sizes
+
+- Stack project lists vertically on smaller screens
+
+- Preserve 20px margins at all breakpoints
+
+
+
+## Content Structure
+
+
+
+### Projects to Include
+
+1. Docu.Text - Documentary Festival, NLI (2018)
+
+2. Lightricks Design Guild - Posters & Events (2021-2025)
+
+3. Design Lab - Identity & Event (2024)
+
+4. Design for AI - Identity (2025)
+
+5. Lightricks Internal Brand - Branding & event design (2023-2024)
+
+6. Highlights - Design Guild Newsletter (2025)
+
+7. Lockdown Chronicles - Illustration (2021)
+
+8. AI Workshop - Website (2023)
+
+9. Shelters - Illustration (2025)
+
+10. Code/Play - Experimental (2023-2025)
+
+11. Guns & Roses - AI Animation (2025)
+
+12. Daphne V.0 - Audio Visual Synth (2025)
+
+13. GenZ Factune - Website (2025)
+
+14. AI Reader - Website (2025)
+
+15. BauNow - Identity, Exhibition (2018)
+
+16. Brand Hub - Website (2025)
+
+17. Stories Made by God - Catalog (2016)
+
+18. Across From - Exhibition (2017)
+
+19. Villa & Jungle - Exhibition (2018)
+
+20. M.des Bezalel - Identities (2016-2019)
+
+
+
+### About Content
+
+- Professional bio
+
+- Current roles (Design Operations Lead at Lightricks, Lecturer at Bezalel)
+
+- Education (BA Bezalel 2015, BA Hebrew University 2010)
+
+- Exhibitions and awards
+
+- Specializations and interests
+
+
+
+## Development Notes
+
+- Implement smooth transitions for all interactive elements
+
+- Optimize eye-tracking calculations for performance
+
+- Ensure thumbnail loading is optimized (lazy loading)
+
+- Test eye behavior across different cursor speeds
+
+- Consider prefers-reduced-motion for accessibility
+
+- Maintain semantic HTML structure for accessibility

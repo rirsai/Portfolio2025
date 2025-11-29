@@ -2,87 +2,65 @@
    CSS RESET & BASE STYLES
    ============================================ */
 
-/* Reset default browser styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Base typography and body styles */
+html {
+    font-size: 16px; /* Base font size for rem calculations */
+    height: 100%;
+    overflow: hidden; /* No scrolling */
+    cursor: url('images/cursor.png') 0 0, none !important; /* Custom cursor on html element */
+}
+
+/* Hide default cursor and apply custom cursor to ALL elements including interactive ones */
+*, *::before, *::after,
+a, button, input, select, textarea,
+a:hover, button:hover, input:hover,
+a:active, button:active, input:active,
+a:focus, button:focus, input:focus {
+    cursor: url('images/cursor.png') 0 0, none !important;
+}
+
 body {
-    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.2;
+    font-family: 'Inter', 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.2; /* Tight line height */
     color: #000;
-    background-color: #f9f7f7;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    background-color: #f4f2f2; /* Light grey background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow: hidden; /* No scrolling */
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #000;
+    color: #fff;
 }
 
 /* ============================================
    12-COLUMN GRID SYSTEM
    ============================================ */
 
-/* Container: Full width with minimal padding */
 .container {
     width: 100%;
-    margin: 0;
-    padding: 0 15px;
-    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px; /* 20px viewport margins */
 }
 
-/* Visual grid overlay for development - shows 12 equal columns with 10px gaps */
-/* Uses a repeating pattern: column width + 10px gap */
-.grid-12::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1000;
-    /* Pattern repeats: column (calc((100% - 110px) / 12)) + gap (10px) */
-    background-image: repeating-linear-gradient(
-        to right,
-        transparent 0,
-        transparent calc((100% - 110px) / 12),
-        rgba(255, 0, 0, 0.25) calc((100% - 110px) / 12),
-        rgba(255, 0, 0, 0.25) calc((100% - 110px) / 12 + 10px)
-    );
-}
-
-/* Grid wrapper: Creates the 12-column grid */
 .grid-12 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 10px; /* Minimal space between columns */
-    position: relative;
+    gap: 15px; /* 15px gap between columns */
+    width: 100%;
 }
 
-/* Visual grid lines for development - shows the 12 columns with 10px gaps */
-/* Creates vertical lines at each column boundary */
-.grid-12::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1000;
-    /* Calculate: each column is (100% + 10px) / 12, then subtract 10px for the gap */
-    background-image: repeating-linear-gradient(
-        to right,
-        transparent 0,
-        transparent calc((100% + 10px) / 12 - 10px),
-        rgba(255, 0, 0, 0.25) calc((100% + 10px) / 12 - 10px),
-        rgba(255, 0, 0, 0.25) calc((100% + 10px) / 12)
-    );
-}
-
-/* Column classes: Each column spans a certain number of grid columns */
+/* Column span classes */
 .col-1 { grid-column: span 1; }
 .col-2 { grid-column: span 2; }
 .col-3 { grid-column: span 3; }
@@ -96,413 +74,604 @@ body {
 .col-11 { grid-column: span 11; }
 .col-12 { grid-column: span 12; }
 
-/* Custom 1.5 column span - starts at column 6, spans 1.5 columns */
-.col-1-5 {
-    grid-column: 6 / 8; /* Spans columns 6-7, but we'll constrain width */
-    width: calc(1.5 * ((100% - 110px) / 12) + 5px); /* 1.5 columns + half a gap */
-    max-width: calc(1.5 * ((100% - 110px) / 12) + 5px);
-    align-self: start; /* Align to top of grid row */
-    margin-top: 0; /* Remove any default top margin */
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+/* Name and "Graphic Designer" should be 22px (1.375rem) */
+/* All other text should be 15px (0.9375rem) */
+
+h1 {
+    font-size: 1.375rem; /* 22px */
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+    padding: 0;
 }
 
-/* Ensure Education & Awards sections align to top */
-.col-1-5 .info-section {
-    margin-top: 0;
+h2 {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    text-transform: none; /* No uppercase */
 }
 
-.col-1-5 .info-section:first-child {
-    margin-top: 0;
+h3 {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 400;
+    line-height: 1.2;
 }
 
+p {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.2;
+}
 
 /* ============================================
    HEADER STYLES
    ============================================ */
 
 .header {
-    padding: 15px 0 40px 0;
+    padding: 15px 0 0 0; /* Top margin around 15px */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101; /* Higher than about section (100) so toggle button is clickable */
+    background-color: transparent; /* Transparent so it doesn't block about section */
+    pointer-events: none;
+}
+
+.header .name-container,
+.header .about-toggle-container,
+.header .title-container {
+    background-color: transparent; /* Transparent background */
+}
+
+body.dark-mode .header .name-container,
+body.dark-mode .header .about-toggle-container,
+body.dark-mode .header .title-container {
+    background-color: transparent; /* Transparent in dark mode too */
+}
+
+.header .grid-12 {
+    align-items: start; /* Align all header grid items to top */
+}
+
+.header * {
+    pointer-events: auto; /* Re-enable pointer events for interactive elements */
+}
+
+
+.name-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    align-self: start; /* Force alignment to top of grid cell */
+    height: fit-content;
 }
 
 .name {
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: -0.5px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.title-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    align-self: start;
+    height: fit-content;
 }
 
 .title {
-    font-size: 22px;
-    font-weight: 400;
-    color: #000;
-}
-
-.text-right {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
     text-align: right;
-}
-
-.symbol-header {
-    font-size: 24px;
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 300;
-    line-height: 1;
-}
-
-.intro-text-header {
-    font-size: 14px;
+    font-size: 1.375rem; /* Same as H1 - 22px */
+    font-weight: 400;
     line-height: 1.2;
-    font-weight: 300;
-    margin-top: 0;
+    letter-spacing: -0.02em;
+    display: block;
 }
 
-.contact-header {
+
+
+.about-toggle-container {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 10px; /* Align to right edge of column 3 */
+    margin-left: 7px; /* Move 7px to the right */
 }
 
-.cv-link {
-    font-size: 14px;
-    color: #000;
-    text-decoration: none;
-    font-weight: 300;
-    transition: opacity 0.2s ease;
+.about-toggle {
+    background: none;
+    border: none;
+    cursor: url('images/cursor.png') 0 0, none !important;
+    padding: 0;
+    font-size: 2rem; /* 32px - 5px larger than 27px */
+    font-weight: 400;
+    color: inherit;
+    transition: transform 0.3s ease;
+    line-height: 1;
+    width: 32px; /* 5px larger */
+    height: 32px; /* 5px larger */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-toggle .toggle-icon {
     display: inline-block;
+    transition: transform 0.3s ease;
 }
 
-.cv-link:hover {
-    opacity: 0.6;
-    text-decoration: underline;
+.about-toggle.active .toggle-icon {
+    transform: rotate(45deg); /* Rotates 45 degrees to form × */
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: url('images/cursor.png') 0 0, none !important;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    transition: all 0.3s ease;
+}
+
+.toggle-track {
+    position: relative;
+    width: 44px;
+    height: 23px; /* 10px taller than before (13px + 10px) */
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+body.dark-mode .toggle-track {
+    background-color: #000;
+    border-color: #fff;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    width: 18px; /* 7px larger (was 11px) */
+    height: 18px; /* 7px larger (was 11px) */
+    background-color: #000;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    display: block;
+    cursor: url('images/cursor.png') 0 0, none !important;
+    user-select: none;
+}
+
+.toggle-thumb:active {
+    cursor: url('images/cursor.png') 0 0, none !important;
+}
+
+.dark-mode-toggle.active .toggle-thumb {
+    transform: translateX(21px) translateY(-50%); /* 4px less to the right than original */
+}
+
+body.dark-mode .toggle-thumb {
+    background-color: #fff;
+}
+
+.dark-mode-toggle:hover {
+    opacity: 0.7;
+    cursor: url('images/cursor.png') 0 0, none !important;
 }
 
 /* ============================================
-   MAIN CONTENT STYLES
+   ABOUT SECTION
+   ============================================ */
+
+.about-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    position: fixed;
+    top: 0; /* Aligned to top with H1 and + button */
+    left: 0;
+    right: 0;
+    z-index: 100; /* Very high z-index to appear above all other elements */
+    padding-top: 0;
+    background-color: transparent; /* Transparent background */
+    pointer-events: none;
+    opacity: 0;
+}
+
+.about-section * {
+    pointer-events: auto;
+}
+
+body.dark-mode .about-section {
+    background-color: transparent; /* Transparent in dark mode too */
+}
+
+.about-section.visible {
+    max-height: 2000px; /* Adjust based on content */
+    padding-top: 15px; /* Match H1 top padding */
+    padding-bottom: 0;
+    overflow: visible; /* Allow content to be fully visible */
+    opacity: 1;
+}
+
+.about-text-container {
+    grid-column: 4 / span 2; /* Explicitly set to columns 4-5 */
+    padding: 5px 10px 5px 5px; /* top right bottom left - 10px right padding */
+    align-self: start; /* Align to top */
+    margin-top: 0; /* Ensure no margin blocking top */
+}
+
+.bio {
+    margin: 0;
+    padding: 0;
+    font-size: 0.928125rem; /* Match project items font size */
+}
+
+.education-awards-container {
+    grid-column: 6 / span 2; /* Explicitly set to columns 6-7 */
+    padding: 5px 10px 5px 5px; /* top right bottom left - 10px right padding */
+    align-self: start; /* Align to top */
+}
+
+.education-container,
+.awards-container {
+    padding-left: 0;
+}
+
+.exhibitions-container {
+    grid-column: 8 / span 2; /* Explicitly set to columns 8-9 */
+    padding: 5px 10px 5px 5px; /* top right bottom left - 10px right padding */
+    align-self: start; /* Align to top */
+}
+
+.awards-container {
+    margin-top: 1.5rem; /* Space below Education */
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.info-item p {
+    margin-bottom: 0.25rem;
+}
+
+.contact-container {
+    grid-column: 10 / span 1; /* Explicitly set to column 10 */
+    padding: 5px 10px 5px 5px; /* top right bottom left - 10px right padding */
+    align-self: start; /* Align to top */
+}
+
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0;
+}
+
+.contact-link {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9375rem; /* 15px */
+    transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+    opacity: 0.7;
+    cursor: url('images/cursor.png') 0 0, none !important;
+}
+
+/* ============================================
+   INTERACTIVE EYES
    ============================================ */
 
 .main-content {
-    padding: 60px 0 200px; /* Extra bottom padding for eye graphics */
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    height: auto;
 }
 
-/* Section spacing */
-section {
-    margin-bottom: 50px;
+.eyes-container {
+    display: flex;
+    gap: 10px; /* Eyes close together */
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-/* Introduction section */
-.intro-section {
-    margin-bottom: 60px;
+.eye {
+    width: calc(2.5 * ((100vw - 40px - 110px) / 12) + 15px); /* 2.5 columns width */
+    height: calc(2.5 * ((100vw - 40px - 110px) / 12) + 15px);
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 250px;
+    max-height: 250px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
 }
 
-.symbol {
-    font-size: 24px;
-    display: inline-block;
-    margin-bottom: 15px;
-    font-weight: 300;
+body.dark-mode .eye {
+    border-color: #fff;
+    background: #fff;
 }
 
-.intro-text {
-    font-size: 14px;
-    line-height: 1.2;
-    font-weight: 300;
-    max-width: 100%;
+.eye .pupil {
+    width: 35%;
+    height: 35%;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
 }
 
-.symbol-small {
-    font-size: 14px;
-    display: inline-block;
+body.dark-mode .eye .pupil {
+    background-color: #000;
 }
 
-/* Section titles (Education, Awards, etc.) */
-.section-title {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-    color: #333;
+/* ============================================
+   CURSOR TRAIL (SYSTEM CURSOR STYLE)
+   ============================================ */
+
+#cursorTrail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
 }
 
-/* Info items (Education, Awards entries) */
-.info-item {
-    margin-bottom: 15px;
-    font-size: 15px;
-    line-height: 1.2;
-    font-weight: 300;
+.cursor-arrow {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    transition: transform 0.15s ease-out, opacity 0.2s ease-out;
+    /* Use the same custom cursor image */
+    background-image: url('images/cursor.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top left;
+    image-rendering: auto; /* Remove pixelated for smooth SVG */
 }
 
-.info-item .location {
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px;
-    font-style: italic;
+/* ============================================
+   PROJECT LIST
+   ============================================ */
+
+.footer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    z-index: 10;
+    pointer-events: none; /* Allow clicks to pass through to eyes */
 }
 
-/* Project items */
+.footer .container {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px; /* Align with eyes bottom */
+}
+
+.footer .grid-12 {
+    height: 100%;
+    align-content: flex-end;
+    align-items: flex-end;
+}
+
+.projects-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    pointer-events: auto; /* Re-enable pointer events for projects */
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 5px;
+}
+
 .project-item {
-    margin-bottom: 25px;
-    cursor: pointer;
+    cursor: url('images/cursor.png') 0 0, none !important;
     transition: opacity 0.2s ease;
 }
 
 .project-item:hover {
     opacity: 0.7;
+    cursor: url('images/cursor.png') 0 0, none !important;
 }
 
 .project-title {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 5px;
-    letter-spacing: -0.2px;
+    margin: 0 0 0.25rem 0;
+    font-size: 0.928125rem; /* ~14.85px - 10% smaller than previous */
+    font-weight: 400;
 }
 
 .project-details {
-    font-size: 14px;
-    color: #666;
-    font-weight: 300;
+    font-size: 0.928125rem; /* ~14.85px - 10% smaller than previous */
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.2;
 }
 
-/* Contact section */
-.contact-item {
-    margin-bottom: 12px;
-}
-
-.contact-link {
-    font-size: 14px;
-    color: #000;
-    text-decoration: none;
-    font-weight: 300;
-    transition: opacity 0.2s ease;
-    display: inline-block;
-}
-
-.contact-link:hover {
+.project-year {
+    font-size: 0.928125rem; /* ~14.85px - 10% smaller than previous */
     opacity: 0.6;
-    text-decoration: underline;
+    margin-top: 0.25rem;
+    line-height: 1.2;
 }
 
 /* ============================================
-   EYE GRAPHICS
+   THUMBNAIL PREVIEW
    ============================================ */
 
-.eye-graphics {
+.thumbnail-preview {
     position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    padding-bottom: 10px;
-    z-index: -1; /* Behind content */
+    width: 300px;
+    height: 300px;
+    background-color: #f0f0f0;
+    border: 1px solid currentColor;
+    opacity: 0;
     pointer-events: none;
-}
-
-.eye {
-    width: 220px;
-    height: 220px;
-    border: 2px solid #000;
-    border-radius: 50%;
-    background-color: #fff;
-    position: relative;
+    z-index: 100;
+    transition: opacity 0.2s ease;
     overflow: hidden;
 }
 
-.eye::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + var(--pupil-x, 0px)), calc(-50% + var(--pupil-y, 0px)));
-    width: 88px;
-    height: 88px;
-    background-color: #000;
-    border-radius: 50%;
-    transition: transform 0.3s ease-out;
+.thumbnail-preview.visible {
+    opacity: 1;
+}
+
+.thumbnail-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body.dark-mode .thumbnail-preview {
+    background-color: #1a1a1a;
 }
 
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
 
-/* Tablet: 768px - 1024px */
+/* Tablet: 6 columns */
 @media (max-width: 1024px) {
-    .container {
-        padding: 0 10px;
+    html {
+        font-size: 15px;
     }
     
-    .grid-12 {
+    .eye {
+        min-width: 100px;
+        min-height: 100px;
+        max-width: 150px;
+        max-height: 150px;
+    }
+    
+    .eye .pupil {
+        width: 35%;
+        height: 35%;
+    }
+    
+    .col-3 {
+        grid-column: span 6; /* 2 columns per row on tablet */
+    }
+}
+
+/* Mobile: Stack columns */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0 20px; /* Keep 20px margins */
+    }
+    
+    .col-2,
+    .col-3 {
+        grid-column: span 12;
+    }
+    
+    
+    .eye {
+        min-width: 80px;
+        min-height: 80px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    .eye .pupil {
+        width: 35%;
+        height: 35%;
+    }
+    
+    .eyes-container {
+        gap: 10px;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .awards-container {
+        margin-top: 1rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+    
+    .eye {
+        min-width: 60px;
+        min-height: 60px;
+        max-width: 100px;
+        max-height: 100px;
+    }
+    
+    .eye .pupil {
+        width: 35%;
+        height: 35%;
+    }
+    
+    .eyes-container {
         gap: 8px;
     }
-    
-    /* Stack columns on tablet - 2 columns per row */
-    .col-3 {
-        grid-column: span 6; /* 2 columns per row */
-    }
-    
-    .col-6 {
-        grid-column: span 12; /* Full width on tablet */
-    }
-    
-    .text-right {
-        text-align: left;
-        margin-top: 10px;
-    }
-    
-    .eye-graphics {
-        gap: 10px;
-        padding-bottom: 10px;
-    }
-    
-    .eye {
-        width: 165px;
-        height: 165px;
-    }
-    
-    .eye::after {
-        width: 66px;
-        height: 66px;
-    }
-}
-
-/* Mobile: Below 768px */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 10px;
-    }
-    
-    .grid-12 {
-        gap: 10px;
-    }
-    
-    /* Stack all columns on mobile - full width */
-    .col-1,
-    .col-2,
-    .col-3,
-    .col-4,
-    .col-5,
-    .col-6,
-    .col-7,
-    .col-8,
-    .col-9,
-    .col-10,
-    .col-11,
-    .col-12 {
-        grid-column: span 12; /* All columns full width on mobile */
-    }
-    
-    .header {
-        padding: 15px 0 30px 0;
-    }
-    
-    .name {
-        font-size: 22px;
-    }
-    
-    .title {
-        font-size: 22px;
-    }
-    
-    .intro-text-header {
-        font-size: 14px;
-        margin-top: 0;
-    }
-    
-    .cv-link {
-        font-size: 14px;
-        margin-top: 0;
-    }
-    
-    .main-content {
-        padding: 40px 0 150px;
-    }
-    
-    section {
-        margin-bottom: 40px;
-    }
-    
-    .intro-section {
-        margin-bottom: 50px;
-    }
-    
-    .eye-graphics {
-        gap: 10px;
-        padding-bottom: 10px;
-        bottom: -50px; /* Partially hidden on mobile */
-    }
-    
-    .eye {
-        width: 132px;
-        height: 132px;
-    }
-    
-    .eye::after {
-        width: 53px;
-        height: 53px;
-    }
-}
-
-/* Small mobile: Below 480px */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 10px;
-    }
-    
-    .name {
-        font-size: 22px;
-    }
-    
-    .title {
-        font-size: 22px;
-    }
-    
-    .intro-text {
-        font-size: 15px;
-    }
-    
-    .project-title {
-        font-size: 15px;
-    }
-    
-    .eye-graphics {
-        gap: 10px;
-        padding-bottom: 10px;
-    }
-    
-    .eye {
-        width: 110px;
-        height: 110px;
-    }
-    
-    .eye::after {
-        width: 44px;
-        height: 44px;
-    }
 }
 
 /* ============================================
-   ACCESSIBILITY & SMOOTH SCROLLING
+   ACCESSIBILITY
    ============================================ */
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* Focus styles for keyboard navigation */
-a:focus,
-button:focus {
-    outline: 2px solid #000;
-    outline-offset: 2px;
-}
-
-/* ============================================
-   PRINT STYLES (Optional)
-   ============================================ */
-
-@media print {
-    .eye-graphics {
-        display: none;
-    }
-    
-    .main-content {
-        padding-bottom: 40px;
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 
+/* Show cursor for keyboard navigation */
+body:focus-within {
+    cursor: url('images/cursor.png') 0 0, none !important; /* Keep custom cursor even when focused */
+}

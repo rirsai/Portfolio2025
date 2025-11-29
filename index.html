@@ -5,195 +5,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Renana Irsai - Graphic Designer Portfolio">
     <title>Renana Irsai | Graphic Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Custom Cursor Trail Container -->
+    <div id="cursorTrail"></div>
+
     <!-- Header Section -->
     <header class="header">
         <div class="container">
             <div class="grid-12">
-                <!-- Column 1: Name (grid columns 1-2) -->
-                <div class="col-2">
+                <!-- Column 1-2: Name (H1) -->
+                <div class="col-2 name-container">
                     <h1 class="name">Renana Irsai</h1>
+                    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                        <span class="toggle-track">
+                            <span class="toggle-thumb"></span>
+                        </span>
+                    </button>
                 </div>
-                <!-- Column 2: X symbol + About text (grid columns 3-4) -->
-                <div class="col-2">
-                    <span class="symbol-header">×</span>
-                    <p class="intro-text-header">
-                        Visual designer based in Jerusalem, specializing in brand identity, digital design, and image creation, with focused interests in design history, computational creativity, and artificial intelligence. Currently Design Operations Lead at Lightricks and lecturer at Bezalel Academy of Arts and Design.
-                    </p>
+                
+                <!-- Column 3: About Toggle Button (right edge) -->
+                <div class="col-1 about-toggle-container">
+                    <button class="about-toggle" id="aboutToggle" aria-label="Toggle about section">
+                        <span class="toggle-icon">+</span>
+                    </button>
                 </div>
-                <!-- Column 3: Empty (grid columns 5-6) - Education will go here in main content -->
-                <div class="col-2">
-                    <!-- Empty - Education & Awards in main content -->
-                </div>
-                <!-- Column 4: Empty (grid columns 7-8) - Exhibitions will go here in main content -->
-                <div class="col-2">
-                    <!-- Empty - Exhibitions in main content -->
-                </div>
-                <!-- Column 5: Contact links (grid columns 9-10) -->
-                <div class="col-2">
-                    <div class="contact-header">
-                        <a href="#" class="contact-link">Instagram</a>
-                        <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-                        <a href="#" class="contact-link cv-link">Download CV</a>
-                    </div>
-                </div>
-                <!-- Column 6: Title (grid columns 11-12) -->
-                <div class="col-2 text-right">
-                    <p class="title">Graphic Designer</p>
+                
+                <!-- Spacer columns 4-11 -->
+                <div class="col-8"></div>
+                
+                <!-- Column 12: Title "Graphic Designer" (top right) -->
+                <div class="col-1 title-container">
+                    <h1 class="title">Graphic Designer</h1>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- About Section (closed by default) -->
+    <section class="about-section" id="aboutSection">
         <div class="container">
             <div class="grid-12">
+                <!-- Column 4-5: About text -->
+                <div class="about-text-container">
+                    <p class="bio">
+                        Visual designer based in Jerusalem, specializing in brand identity, digital design, and image creation, with focused interests in design history, computational creativity, and artificial intelligence. Currently Design Operations Lead at Lightricks and lecturer at Bezalel Academy of Arts and Design.
+                    </p>
+                </div>
                 
-                <!-- Column 1: Projects (grid columns 1-2) -->
-                <div class="col-2">
-                    <!-- Projects Column 1 -->
-                    <section class="projects-section">
-                        <div class="project-item">
-                            <h3 class="project-title">Docu.Text</h3>
-                            <p class="project-details">Documentary Festival, NLI</p>
-                            <p class="project-details">2018</p>
-                        </div>
-                        <div class="project-item">
-                            <h3 class="project-title">Lightricks Design Guild</h3>
-                            <p class="project-details">Posters & Events, 2021-2025</p>
-                        </div>
-                        <div class="project-item">
-                            <h3 class="project-title">Design Lab</h3>
-                            <p class="project-details">Identity & Event, 2024</p>
-                        </div>
-                        <div class="project-item">
-                            <h3 class="project-title">Design for AI</h3>
-                            <p class="project-details">Identity, 2025</p>
-                        </div>
-                        <div class="project-item">
-                            <h3 class="project-title">Lightricks Internal Brand</h3>
-                            <p class="project-details">Branding & event design, 2023-2024</p>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- Column 2: Empty space (grid columns 3-4) - aligns with X + About in header -->
-                <div class="col-2">
-                    <!-- Empty - aligns with about text in header -->
-                </div>
-
-                <!-- Column 3: Education and Awards (grid columns 5-6) -->
-                <div class="col-2">
-                    <!-- Education -->
-                    <section class="info-section">
-                        <h2 class="section-title">Education</h2>
+                <!-- Column 6-7: Education and Awards -->
+                <div class="education-awards-container">
+                    <div class="education-container">
+                        <h2 class="section-title"><strong>Education</strong></h2>
                         <div class="info-item">
-                            <p>2015</p>
-                            <p>BA Bezalel Academy</p>
-                            <p>Communication Design</p>
+                            <p>2015<br> BA Bezalel Academy Communication Design</p>
+                            <p>2009<br> BA Hebrew University Art History & Amirim Humanitities Program for Outstanding Students in Humanities (Cum Laude)</p>
                         </div>
+                    </div>
+                    
+                    <div class="awards-container">
+                        <h2 class="section-title"><strong>Awards</strong></h2>
                         <div class="info-item">
-                            <p>2010</p>
-                            <p>BA Hebrew University</p>
-                            <p>Art History & Amirim Program</p>
-                            <p>for Outstanding Student</p>
-                            <p>in Humanities (Cum Laude) <span class="symbol-small">田</span></p>
-                        </div>
-                    </section>
-
-                    <!-- Awards -->
-                    <section class="info-section">
-                        <h2 class="section-title">Awards</h2>
-                        <div class="info-item">
-                            <p>Shestovich Prize 2015</p>
+                            <p>2016 <br>Shestovich Prize</p>
                             <p>Bezalel graduation project</p>
                         </div>
                         <div class="info-item">
-                            <p>Tokyo TDC 2015</p>
+                            <p>2015<br> Tokyo TDC</p>
                             <p>student category</p>
-                            <p>Area B</p>
+                           
                         </div>
                         <div class="info-item">
-                            <p>Communication Arts</p>
-                            <p>Magazine 2015</p>
+                            <p>2015<br> Communication Arts Magazine</p>
                             <p>Student category</p>
-                            <p>Chapachuka</p>
+                        
                         </div>
-                    </section>
+                    </div>
                 </div>
-
-                <!-- Column 4: Exhibitions (grid columns 7-8) -->
-                <div class="col-2">
-                    <!-- Exhibitions -->
-                    <section class="info-section">
-                        <h2 class="section-title">Exhibitions</h2>
-                        <div class="info-item">
-                            <p>Retrospective exhibition -</p>
-                            <p>10 years anniversary at</p>
-                            <p>Hansen House</p>
-                            <p class="location">Hansen House, Jerusalem</p>
-                            <p class="location">2023</p>
-                        </div>
-                        <div class="info-item">
-                            <p>Hybrid Botanics</p>
-                            <p>(Collaboration with Maya</p>
-                            <p>Ben David)</p>
-                            <p class="location">Binyamini Center, Tel Aviv</p>
-                            <p class="location">2018</p>
-                        </div>
-                        <div class="info-item">
-                            <p>Tokyo TDC</p>
-                            <p class="location">Ginza Gallery, Tokyo</p>
-                            <p class="location">2015</p>
-                        </div>
-                    </section>
-
-                    <!-- Projects in Column 4 -->
-                    <section class="projects-section">
-                        <div class="project-item">
-                            <h3 class="project-title">Code/Play</h3>
-                            <p class="project-details">Experimental</p>
-                            <p class="project-details">2023-2025</p>
-                        </div>
-                    </section>
+                
+                <!-- Column 8-9: Exhibitions -->
+                <div class="exhibitions-container">
+                    <h2 class="section-title"><strong>Exhibitions</strong></h2>
+                    <div class="info-item">
+                        <p>2023<br>Hansen House 10th Anniversary retrospective</p>
+                        <p>Hansen House, Jerusalem</p>
+                    </div>
+                    <div class="info-item">
+                        <p>2018<br>Hybrid Botanics (Collab with Maya Ben David)</p>
+                        <p>Binyamini Center, Tel Aviv</p>
+                    </div>
+                    <div class="info-item">
+                        <p>2015<br> Tokyo TDC</p>
+                        <p>Ginza Gallery, Tokyo</p>
+                    </div>
                 </div>
-
-                <!-- Column 5: Empty space (grid columns 9-10) - aligns with Contact in header -->
-                <div class="col-2">
-                    <!-- Empty - aligns with contact links in header -->
+                
+                <!-- Column 10: Contact links -->
+                <div class="contact-container">
+                    <div class="contact-section">
+                        <a href="#" class="contact-link"><strong>Instagram</strong></a>
+                        <a href="mailto:your.email@example.com" class="contact-link"><strong>Email</strong></a>
+                        <a href="#" class="contact-link"><strong>Download CV</strong></a>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Column 6: Projects (grid columns 11-12) -->
-                <div class="col-2">
-                    <!-- Projects Column 6 -->
-                    <section class="projects-section">
-                        <div class="project-item">
-                            <h3 class="project-title">BauNow</h3>
-                            <p class="project-details">Identity, Exhibition</p>
-                            <p class="project-details">2018</p>
-                        </div>
-                        <div class="project-item">
-                            <h3 class="project-title">Brand Hub</h3>
-                            <p class="project-details">Website</p>
-                            <p class="project-details">2025</p>
-                        </div>
-                    </section>
-                </div>
-
+    <!-- Main Content: Interactive Eyes (centered, at bottom) -->
+    <main class="main-content">
+        <div class="eyes-container">
+            <div class="eye eye-left">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye eye-right">
+                <div class="pupil"></div>
             </div>
         </div>
     </main>
 
-    <!-- Eye Graphics -->
-    <div class="eye-graphics">
-        <div class="eye eye-left"></div>
-        <div class="eye eye-right"></div>
-    </div>
+    <!-- Footer: Project List (10 projects on left: columns 1-4, 10 projects on right: columns 9-12) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-12">
+                <!-- Left side: Columns 1-4 (10 projects) -->
+                <!-- Column 1: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="lightricks-design-guild">
+                        <h2 class="project-title">Lightricks <br>Design Guild</h2>
+                        <p class="project-details">Posters & Events</p>
+                        <p class="project-year">2021-2025</p>
+                    </div>
+                    <div class="project-item" data-project="docu-text">
+                        <h2 class="project-title">Docu.Text</h2>
+                        <p class="project-details">Documentary Festival, NLI</p>
+                        <p class="project-year">2018</p>
+                    </div>
+                    <div class="project-item" data-project="design-lab">
+                        <h2 class="project-title">Design Lab</h2>
+                        <p class="project-details">Identity & Event</p>
+                        <p class="project-year">2024</p>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="lightricks-internal-brand">
+                        <h2 class="project-title">Lightricks<br> Internal Brand</h2>
+                        <p class="project-details">Branding & event design</p>
+                        <p class="project-year">2023-2024</p>
+                    </div>
+                    <div class="project-item" data-project="highlights">
+                        <h2 class="project-title">Highlights</h2>
+                        <p class="project-details">Design Guild Newsletter</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                </div>
+                
+                <!-- Column 3: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="lockdown-chronicles">
+                        <h2 class="project-title">Lockdown Chronicles</h2>
+                        <p class="project-details">Illustration</p>
+                        <p class="project-year">2021</p>
+                    </div>
+                    <div class="project-item" data-project="ai-workshop">
+                        <h2 class="project-title">AI Workshop</h2>
+                        <p class="project-details">Website</p>
+                        <p class="project-year">2023</p>
+                    </div>
+                    <div class="project-item" data-project="shelters">
+                        <h2 class="project-title">Shelters</h2>
+                        <p class="project-details">Illustration</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                </div>
+                
+                <!-- Column 4: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="design-for-ai">
+                        <h2 class="project-title">Design for AI</h2>
+                        <p class="project-details">Identity</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                    <div class="project-item" data-project="baunow">
+                        <h2 class="project-title">BauNow</h2>
+                        <p class="project-details">Identity, Exhibition</p>
+                        <p class="project-year">2018</p>
+                    </div>
+                </div>
+                
+                <!-- Spacer columns 5-8 (for eyes) -->
+                <div class="col-4"></div>
+                
+                <!-- Right side: Columns 9-12 (10 projects) -->
+                <!-- Column 9: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="guns-roses">
+                        <h2 class="project-title">Guns & Roses</h2>
+                        <p class="project-details">AI Animation</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                    <div class="project-item" data-project="daphne-v0">
+                        <h2 class="project-title">Daphne V.0</h2>
+                        <p class="project-details">Audio Visual Synth</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                    <div class="project-item" data-project="genz-factune">
+                        <h2 class="project-title">GenZ Factune</h2>
+                        <p class="project-details">Website</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                </div>
+                
+                <!-- Column 10: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="ai-reader">
+                        <h2 class="project-title">AI Reader</h2>
+                        <p class="project-details">Website</p>
+                        <p class="project-year">2025</p>
+                    </div>
+                    <div class="project-item" data-project="stories-made-by-god">
+                        <h2 class="project-title">Stories Made <br> by God</h2>
+                        <p class="project-details">Catalog</p>
+                        <p class="project-year">2016</p>
+                    </div>
+                </div>
+                
+                <!-- Column 11: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="across-from">
+                        <h2 class="project-title">Across From</h2>
+                        <p class="project-details">Exhibition</p>
+                        <p class="project-year">2017</p>
+                    </div>
+                    <div class="project-item" data-project="villa-jungle">
+                        <h2 class="project-title">Villa & Jungle</h2>
+                        <p class="project-details">Exhibition</p>
+                        <p class="project-year">2018</p>
+                    </div>
+                </div>
+                
+                <!-- Column 12: Projects -->
+                <div class="col-1 projects-column">
+                    <div class="project-item" data-project="code-play">
+                        <h2 class="project-title">Code/Play</h2>
+                        <p class="project-details">Experimentatal</p>
+                        <p class="project-year">2023-2025</p>
+                    </div>
+                    <div class="project-item" data-project="mdes-bezalel">
+                        <h2 class="project-title">M.des Bezalel</h2>
+                        <p class="project-details">Various Projects</p>
+                        <p class="project-year">2016-2019</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Thumbnail Preview (appears on hover) -->
+    <div class="thumbnail-preview" id="thumbnailPreview"></div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
