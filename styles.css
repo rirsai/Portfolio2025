@@ -476,16 +476,17 @@ body.dark-mode .eye .pupil {
 
 .cursor-arrow {
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 32px; /* Same size as main cursor */
+    height: 32px; /* Same size as main cursor */
     pointer-events: none;
-    transition: transform 0.15s ease-out, opacity 0.2s ease-out;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
     /* Use the same custom cursor image */
     background-image: url('images/cursor.png');
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: top left;
-    image-rendering: auto; /* Remove pixelated for smooth SVG */
+    background-position: center center;
+    transform-origin: center center; /* Rotate from center */
+    image-rendering: auto;
 }
 
 /* ============================================

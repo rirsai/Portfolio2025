@@ -5,8 +5,9 @@
 let mouseX = 0;
 let mouseY = 0;
 let cursorHistory = []; // Array to store cursor positions for trail
-const TRAIL_LENGTH = 12; // Number of cursor arrows in trail (increased for larger distribution)
+const TRAIL_LENGTH = 12; // Number of cursor arrows in trail (pack of cursors)
 const TRAIL_DELAY = 100; // Delay between each cursor in trail (ms) - increased for larger spread
+const PACK_SPREAD = 80; // Maximum distance cursors can spread from main cursor (in pixels)
 
 // Eye elements
 const leftEye = document.querySelector('.eye-left');
@@ -48,26 +49,26 @@ function initCursorTrail() {
     // Create cursor arrows for the trail
     for (let i = 0; i < TRAIL_LENGTH; i++) {
         const arrow = createCursorArrow();
-        arrow.style.opacity = `${1 - (i * 0.15)}`; // Fade older cursors slightly
+        arrow.style.opacity = '1'; // All cursors fully visible (no opacity fade)
         trailContainer.appendChild(arrow);
     }
 }
 
 /**
- * Update cursor trail positions
+ * Update cursor trail positions - linear trail with no opacity fade
  */
 function updateCursorTrail() {
     const arrows = document.querySelectorAll('.cursor-arrow');
     
     arrows.forEach((arrow, index) => {
-        // Get position from history with larger delay for more spread
-        const historyIndex = cursorHistory.length - 1 - (index * 5); // Increased from 2 to 5 for larger distribution
+        // Get position from history with delay for trail effect
+        const historyIndex = cursorHistory.length - 1 - (index * 5);
         
         if (historyIndex >= 0 && historyIndex < cursorHistory.length) {
             const pos = cursorHistory[historyIndex];
-            // Position cursor so the tip (top-left corner) is at the cursor position
+            // Position cursor at the historical position (linear trail)
             arrow.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
-            arrow.style.opacity = `${1 - (index * 0.08)}`; // Adjusted opacity fade for more cursors
+            arrow.style.opacity = '1'; // No opacity fade - all cursors fully visible
         } else {
             // Hide if no history available
             arrow.style.opacity = '0';
