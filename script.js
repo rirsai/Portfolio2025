@@ -350,51 +350,57 @@ function initProjectHovers() {
     
     projectItems.forEach(item => {
         item.addEventListener('mouseenter', (e) => {
-            // Show thumbnail preview
-            // For now, we'll just position it dynamically
-            // Later, you can add actual thumbnail images
-            const rect = item.getBoundingClientRect();
+            // Get project ID from data attribute
+            const projectId = item.getAttribute('data-project');
+            const projectTitle = item.querySelector('.project-title').textContent;
             
-            // Position preview away from eyes and text
-            let previewX = mouseX + 50;
-            let previewY = mouseY + 50;
+            // Load thumbnail image based on project ID
+            let imagePath = '';
+            if (projectId === 'design-for-ai') {
+                imagePath = 'images/design-for-ai-thumb.jpeg';
+            } else if (projectId === 'gpt-workshop') {
+                imagePath = 'images/gpt-workshop-thumb.gif';
+            } else if (projectId === 'shelters') {
+                imagePath = 'images/shelters-thumb.gif';
+            } else if (projectId === 'daphne-v0') {
+                imagePath = 'images/Daphne-thumb.gif';
+            }
+            // Add more projects here as needed
             
-            // Keep preview within viewport
-            if (previewX + 300 > window.innerWidth) {
-                previewX = mouseX - 350;
-            }
-            if (previewY + 300 > window.innerHeight) {
-                previewY = mouseY - 350;
-            }
+            // Position preview at random position in defined area
+            // Area: below header section and above project item texts
+            const headerHeight = 60; // Header height (padding-top: 15px + content)
+            const projectAreaHeight = 350; // Space reserved for project texts at bottom (increased padding)
+            const minY = headerHeight + 20; // Start below header with some margin
+            const maxY = window.innerHeight - projectAreaHeight - 400; // End above project area (400px is thumbnail height)
+            const minX = 20; // Left margin
+            const maxX = window.innerWidth - 400 - 20; // Right margin (400px is thumbnail width)
+            
+            // Ensure valid range
+            const validMaxY = Math.max(minY, maxY);
+            const validMaxX = Math.max(minX, maxX);
+            
+            // Random position within the defined area
+            const previewX = Math.random() * (validMaxX - minX) + minX;
+            const previewY = Math.random() * (validMaxY - minY) + minY;
             
             thumbnailPreview.style.left = `${previewX}px`;
             thumbnailPreview.style.top = `${previewY}px`;
-            thumbnailPreview.classList.add('visible');
             
-            // TODO: Load actual thumbnail image based on data-project attribute
-            // const projectId = item.getAttribute('data-project');
-            // thumbnailPreview.innerHTML = `<img src="images/${projectId}-thumb.jpg" alt="${item.querySelector('.project-title').textContent}">`;
+            // Load and display image if path exists
+            if (imagePath) {
+                thumbnailPreview.innerHTML = `<img src="${imagePath}" alt="${projectTitle}" style="width: 100%; height: 100%; object-fit: contain;">`;
+                thumbnailPreview.classList.add('visible');
+            } else {
+                thumbnailPreview.classList.remove('visible');
+            }
         });
         
         item.addEventListener('mouseleave', () => {
             thumbnailPreview.classList.remove('visible');
         });
         
-        item.addEventListener('mousemove', (e) => {
-            // Update preview position as cursor moves
-            let previewX = e.clientX + 50;
-            let previewY = e.clientY + 50;
-            
-            if (previewX + 300 > window.innerWidth) {
-                previewX = e.clientX - 350;
-            }
-            if (previewY + 300 > window.innerHeight) {
-                previewY = e.clientY - 350;
-            }
-            
-            thumbnailPreview.style.left = `${previewX}px`;
-            thumbnailPreview.style.top = `${previewY}px`;
-        });
+        // Removed mousemove handler - thumbnails stay in random position, don't follow cursor
     });
 }
 
