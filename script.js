@@ -364,6 +364,12 @@ function initProjectHovers() {
                 imagePath = 'images/shelters-thumb.gif';
             } else if (projectId === 'daphne-v0') {
                 imagePath = 'images/Daphne-thumb.gif';
+            } else if (projectId === 'ai-reader') {
+                imagePath = 'images/ai-reader-thumb.gif';
+            } else if (projectId === 'lockdown-chronicles') {
+                imagePath = 'images/lockdown-chronicles-thumb.png';
+            } else if (projectId === 'design-lab') {
+                imagePath = 'images/design-lab-thumb.jpeg';
             }
             // Add more projects here as needed
             
