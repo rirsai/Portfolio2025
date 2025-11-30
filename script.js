@@ -403,20 +403,78 @@ function initProjectHovers() {
 
 function init() {
     // Force custom cursor on all elements (prevent browser from resetting it)
+    // This function is called continuously to prevent browser from resetting cursor
+    // Using data URI for more persistent cursor (embedded in code, no file loading)
+    const CURSOR_DATA_URI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA0xJREFUeNrEV11IU3EUP3cfui3za9lcQgzELLDmiySBIg0RX6qHQGPLXQk/0GBQIOmDGqS+++Br88FgQfXQQ2mIMkXwZX7Vktpy2WhubGNzn7o7/50tFJWN0nZvvz9n/3Huf3fnnt/5ugBpoNfrL3ncXqf50+cuYBG8dBfEYjG/4GzBeWm+tHLTtqnq7OgUsWGA4E8His4VteHWFttlFLh/58wD+5h4MQGa+xrQqDUj1q/WXs4NWFpeAsNLA8jl8nsXSkoaOTcggT1cFdcqoLr6+g2fzxdyuVx9nMXAbxBg4jEIhoL8xcVFSXZ2dpnb7a4TCoXLeXl5PtY9sA+r1QoNDQ0wNTVF4x/P8Hi8Sk4oOI65uTkYHBwEk8mk9fv99H8xYGhoCKLRKC0SibQcxEBq6HQ6qEREIpGZeDw+npOTo+eUgPX1dcA4yDcajXVYOW3b29s2VC/n5ub6WKXgMMxmczIwJycnaYlEMsMwTCXrMZAK6AUYGBiAlZUV7dbWVi8nFBwPzITU1tbSWVlZAVSNcGrAPrq7uwGpEIfDYaPD4XhXWlo6wqkBFosF+Hy+AItWjdPptLe3tyswVbdGR0ejJ7qRwWC4srdDyCPdY0IBRZL1+ITS1NREYrEYQU+oWA/CdBkyPDwMCwsLd/F7FycUHMba2lpSXr960ykrKnahaow1A9RqNbTcbwEqhVOVV5WopzIXhIWFhSCVSsFutwOW4aROoVCA6qYKQoHwNybGhI7/BucIb8YM6OjogP7+fqivr4f5+fnjs8MDaXHhLCuVUCaTQU9PD5SVlc1SFPW0sbHR1tzcfFCInmGHNJmWtD83Hf8+O6ZKQ6VSSbDWk2AwOJg4g8VmZnp6+lDqUWTq/Qfi8/oDGS7FFIzrx0FeLF8NBIK63d0dW/rhDRchGWzHiefCVVVVlQg0n+SM+IBfnAGScmSA3dtLSsYoYCIMiYSipJVuvZjq3MbGRk04GCa9T/oOqBAIBCQajhKrxfr81B7A9Ap6fJ63h54skpIcigKhIAv4PP4RvZAvxJ4gOD0FNE3/wO3WaT1IDj5YbsdfEF6Pt7X8cvntsbGxOziiATag0OrH1Yf4AmMBrpBITZySSUI8Hs9fp+EvAQYAEASQ3VqhT+UAAAAASUVORK5CYII=";
+    
     function enforceCustomCursor() {
-        const cursorStyle = "url('images/cursor.png') 0 0, none";
-        document.documentElement.style.cursor = cursorStyle;
-        document.body.style.cursor = cursorStyle;
-        // Apply to all elements
-        document.querySelectorAll('*').forEach(el => {
-            el.style.cursor = cursorStyle;
-        });
+        // Use file path instead of data URI for better browser compatibility
+        const cursorValue = `url('images/cursor.png') 0 0, none`;
+        
+        // Apply to document root with highest priority
+        document.documentElement.style.setProperty('cursor', cursorValue, 'important');
+        document.body.style.setProperty('cursor', cursorValue, 'important');
+        
+        // Apply to all elements using style attribute for maximum priority
+        // Only update elements that don't have the cursor set (for performance)
+        // Use a more efficient check to avoid unnecessary updates
+        const allElements = document.querySelectorAll('*');
+        const maxElements = 100; // Limit to first 100 elements per call for performance
+        const startIndex = Math.floor(Math.random() * Math.max(0, allElements.length - maxElements));
+        
+        for (let i = startIndex; i < Math.min(startIndex + maxElements, allElements.length); i++) {
+            const el = allElements[i];
+            // Only update if cursor is not already set correctly
+            if (!el.style.cursor || !el.style.cursor.includes('cursor.png')) {
+                el.style.setProperty('cursor', cursorValue, 'important');
+            }
+        }
+        
+        // Also inject a style tag as a fallback (highest CSS priority)
+        // This ensures CSS-level enforcement
+        let styleTag = document.getElementById('force-cursor-style');
+        if (!styleTag) {
+            styleTag = document.createElement('style');
+            styleTag.id = 'force-cursor-style';
+            document.head.appendChild(styleTag);
+        }
+        // Update style tag content to ensure it's always active
+        styleTag.textContent = `
+            html, body, html *, body *,
+            html *:hover, body *:hover,
+            html *:active, body *:active,
+            html *:focus, body *:focus {
+                cursor: url('images/cursor.png') 0 0, none !important;
+            }
+        `;
     }
     
-    // Enforce cursor immediately and after a short delay
+    // Preload cursor image to ensure it's available
+    const cursorImg = new Image();
+    cursorImg.src = 'images/cursor.png';
+    cursorImg.onload = () => {
+        console.log('Cursor image loaded successfully');
+        enforceCustomCursor();
+    };
+    cursorImg.onerror = () => {
+        console.error('Failed to load cursor image');
+    };
+    
+    // Enforce cursor immediately and repeatedly
     enforceCustomCursor();
+    setTimeout(enforceCustomCursor, 50);
     setTimeout(enforceCustomCursor, 100);
+    setTimeout(enforceCustomCursor, 200);
     setTimeout(enforceCustomCursor, 500);
+    
+    // Also enforce on any DOM mutations (elements added dynamically)
+    const observer = new MutationObserver(() => {
+        enforceCustomCursor();
+    });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
     
     // Initialize cursor trail with system cursor style
     initCursorTrail();
@@ -446,8 +504,28 @@ function init() {
         updateEyes();
     });
     
-    // Re-enforce cursor on mouse move (in case browser resets it)
+    // Re-enforce cursor on key events (in case browser resets it)
+    // Only essential events to avoid performance issues
     document.addEventListener('mousemove', enforceCustomCursor);
+    document.addEventListener('click', enforceCustomCursor);
+    document.addEventListener('mousedown', enforceCustomCursor);
+    
+    // Lightweight cursor enforcement - throttled to avoid performance issues
+    let cursorEnforcementFrameId = null;
+    let lastEnforceTime = 0;
+    function continuousCursorEnforcement() {
+        const now = Date.now();
+        // Throttle to every 200ms to avoid performance issues
+        if (now - lastEnforceTime > 200) {
+            enforceCustomCursor();
+            lastEnforceTime = now;
+        }
+        cursorEnforcementFrameId = requestAnimationFrame(continuousCursorEnforcement);
+    }
+    continuousCursorEnforcement();
+    
+    // Also enforce periodically as a backup (every 500ms - less aggressive)
+    setInterval(enforceCustomCursor, 500);
 }
 
 // Start everything when DOM is ready
