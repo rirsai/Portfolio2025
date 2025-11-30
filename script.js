@@ -370,6 +370,10 @@ function initProjectHovers() {
                 imagePath = 'images/lockdown-chronicles-thumb.png';
             } else if (projectId === 'design-lab') {
                 imagePath = 'images/design-lab-thumb.jpeg';
+            } else if (projectId === 'lightricks-design-guild') {
+                imagePath = 'images/Lightricks-design-guild-thumb.png';
+            } else if (projectId === 'guns-roses') {
+                imagePath = 'images/guns-roses-thumb.gif';
             }
             // Add more projects here as needed
             
